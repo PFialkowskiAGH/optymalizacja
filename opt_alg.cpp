@@ -213,8 +213,12 @@ solution HJ(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double alp
 		Xopt.ud = trans(x0);
 		solution XB(x0), XB_old, X;
 		XB.fit_fun(ff, ud1, ud2);
+		int i = 1;
 		while (true)
 		{
+			cout << "it: " << i << endl;
+			i++;
+			cout << "XB: " << XB.x << endl;
 			X = HJ_trial(ff, XB, s, ud1, ud2);
 			if (X.y < XB.y)
 			{
@@ -300,8 +304,12 @@ solution Rosen(matrix(*ff)(matrix, matrix, matrix), matrix x0, matrix s0, double
 		int n = get_dim(XB);
 		matrix l(n, 1), p(n, 1), s(s0), D = ident_mat(n);
 		XB.fit_fun(ff, ud1, ud2);
+		int i = 1;
 		while (true)
 		{
+			cout << "it: " << i << endl;
+			i++;
+			cout << "XB: " << XB.x << endl;
 			for (int i = 0; i < n; ++i)
 			{
 				X.x = XB.x + s(i) * D[i];
