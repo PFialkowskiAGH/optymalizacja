@@ -11,7 +11,7 @@ Akademia Górniczo-Hutnicza
 
 void lab1();
 void lab2();
-//void lab3();
+void lab3();
 //void lab4();
 //void lab5();
 //void lab6();
@@ -22,6 +22,7 @@ int main()
 	{
 		//lab1();
 		lab2();
+		//lab3();
 	}
 	catch (string EX_INFO)
 	{
@@ -79,28 +80,65 @@ void lab2()
 	solution opt;
 	matrix x0, s0;
 
-	s0 = matrix(2, 1, s);
-	x0 = 2 * rand_mat(2, 1) - 1;
-	//x0(1) = 0;
-	//x0(0) = 0;
-	cout << x0 << endl << endl;
-	opt = HJ(ff2T, x0, s, alphaHJ, epsilon, Nmax);
-	cout << opt << endl << endl;
-	solution::clear_calls();
-	opt = Rosen(ff2T, x0, s0, alphaR, beta, epsilon, Nmax);
-	cout << opt << endl << endl;
-	solution::clear_calls();
+	//s0 = matrix(2, 1, s);
+	//x0 = 2 * rand_mat(2, 1) - 1;
+	////x0(1) = 0.5;
+	////x0(0) = 0.5;
+	//cout << x0 << endl << endl;
+	//opt = HJ(ff2T, x0, s, alphaHJ, epsilon, Nmax);
+	//cout << opt << endl << endl;
+	//solution::clear_calls();
+	//opt = Rosen(ff2T, x0, s0, alphaR, beta, epsilon, Nmax);
+	//cout << opt << endl << endl;
+	//solution::clear_calls();
 
 	//Ramie robota
-	/*s = 2;
+	s = 2;
 
 	x0 = 10 * rand_mat(2, 1);
 	cout << x0 << endl << endl;
 	opt = HJ(ff2R, x0, s, alphaHJ, epsilon, Nmax);
+	/*int n = get_len(pom[0]);
+	for (int i = 0; i < n; ++i)
+		cout << pom[1](i, 0) << "," << pom[1](i, 1) << endl;*/
 	cout << opt << endl << endl;
 	solution::clear_calls();
 	s0 = matrix(2, 1, s);
 	opt = Rosen(ff2R, x0, s0, alphaR, beta, epsilon, Nmax);
+	/*n = get_len(pom[0]);
+	for (int i = 0; i < n; ++i)
+		cout << pom[1](i, 0) << "," << pom[1](i, 1) << endl;*/
 	cout << opt << endl << endl;
+	solution::clear_calls();
+}
+
+void lab3()
+{
+	//Funkcja testowa
+	matrix x0, a(4);
+	double c_ex = 1, c_in = 10, dc_ex = 2, dc_in = 0.5, epsilon = 1e-4;
+	int Nmax = 10000;
+	solution opt;
+	do
+		x0 = 5 * rand_mat(2, 1) + 1;
+	while (norm(x0) > a);
+	cout << x0 << endl << endl;
+	opt = pen(ff3Ta, x0, c_ex, dc_ex, epsilon, Nmax, a);
+	cout << opt << endl;
+	cout << norm(opt.x) << endl << endl;
+	solution::clear_calls();
+	opt = pen(ff3Tb, x0, c_in, dc_in, epsilon, Nmax, a);
+	cout << opt << endl;
+	cout << norm(opt.x) << endl << endl;
+	solution::clear_calls();
+
+	//Rzut pilka
+	/*x0 = matrix(2, 1);
+	x0(0) = 20 * m2d(rand_mat()) - 10;
+	x0(1) = 40 * m2d(rand_mat()) - 20;
+	cout << x0 << endl << endl;
+	opt = pen(ff3R, x0, c_ex, dc_ex, epsilon, Nmax);
+	opt.y = -opt.y;
+	cout << opt << endl;
 	solution::clear_calls();*/
 }
