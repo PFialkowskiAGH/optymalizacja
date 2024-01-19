@@ -119,29 +119,32 @@ void lab3()
 	double c_ex = 1, c_in = 10, dc_ex = 2, dc_in = 0.5, epsilon = 1e-4;
 	int Nmax = 10000;
 	solution opt;
-	do
-		x0 = 5 * rand_mat(2, 1) + 1;
-	while (norm(x0) > a);
-	//x0(0) = 4.5;
-	//x0(1) = 4.5;
-	cout << x0 << endl << endl;
-	opt = pen(ff3Ta, x0, c_ex, dc_ex, epsilon, Nmax, a);
-	cout << opt << endl;
-	cout << norm(opt.x) << endl << endl;
-	solution::clear_calls();
-	opt = pen(ff3Tb, x0, c_in, dc_in, epsilon, Nmax, a);
-	cout << opt << endl;
-	cout << norm(opt.x) << endl << endl;
-	cout << testFun(opt.x) << endl;
-	solution::clear_calls();
+	//do
+	//	x0 = 5 * rand_mat(2, 1) + 1;
+	//while (norm(x0) > a);
+	////x0(0) = 4.5;
+	////x0(1) = 4.5;
+	//cout << x0 << endl << endl;
+	//opt = pen(ff3Ta, x0, c_ex, dc_ex, epsilon, Nmax, a);
+	//cout << opt << endl;
+	//cout << norm(opt.x) << endl << endl;
+	//solution::clear_calls();
+	//opt = pen(ff3Tb, x0, c_in, dc_in, epsilon, Nmax, a);
+	//cout << opt << endl;
+	//cout << norm(opt.x) << endl << endl;
+	//cout << testFun(opt.x) << endl;
+	//solution::clear_calls();
 
 	//Rzut pilka
-	/*x0 = matrix(2, 1);
+	x0 = matrix(2, 1);
 	x0(0) = 20 * m2d(rand_mat()) - 10;
 	x0(1) = 40 * m2d(rand_mat()) - 20;
 	cout << x0 << endl << endl;
 	opt = pen(ff3R, x0, c_ex, dc_ex, epsilon, Nmax);
+	int n = get_len(pom[0]);
+	for (int i = 0; i < n; ++i)
+		cout << pom[1](i, 0) << "," << pom[1](i, 2) << endl;
 	opt.y = -opt.y;
 	cout << opt << endl;
-	solution::clear_calls();*/
+	solution::clear_calls();
 }

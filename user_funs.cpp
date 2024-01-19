@@ -180,8 +180,9 @@ matrix ff3R(matrix x, matrix ud1, matrix ud2)
 	if (abs(Y[1](i50, 0) - 5) - 1 > 0)
 		y = y + ud2 * pow(abs(Y[1](i50, 0) - 5) - 1, 2);
 	//wy³¹czyæ x,dx,y,dy (0) (3)
-	Y[0].~matrix();
-	Y[1].~matrix();
+	pom = Y;
+	//Y[0].~matrix();
+	//Y[1].~matrix();
 	return y;
 }
 
