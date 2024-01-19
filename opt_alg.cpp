@@ -428,7 +428,8 @@ solution sym_NM(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double
 		S[0].fit_fun(ff, ud1, ud2);
 		for (int i = 1; i < N; ++i)
 		{
-			S[i].x = S[0].x + s * D[i];
+			S[i].x = S[0].x + s * D(i-1);
+			S[i].fit_fun(ff, ud1, ud2);
 		}
 		solution PO, PE, PZ;
 		matrix pc;
@@ -450,6 +451,7 @@ solution sym_NM(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double
 
 			pc = pc / (N - 1.0);
 			PO.x = pc + alpha * (pc - S[i_max].x);
+
 			PO.fit_fun(ff, ud1, ud2);
 
 			if (S[i_min].y <= PO.y && PO.y < S[i_max].y)
@@ -469,7 +471,7 @@ solution sym_NM(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double
 				PZ.x = pc + beta * (S[i_max].x - pc);
 				PZ.fit_fun(ff, ud1, ud2);
 				if (PZ.y < S[i_max].y)
-					S[i_max] = PO;
+					S[i_max] = PZ;
 				else
 				{
 					for (int i = 0; i < N; ++i)

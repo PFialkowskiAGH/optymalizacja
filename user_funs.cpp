@@ -114,74 +114,48 @@ matrix df2(double t, matrix Y, matrix ud1, matrix ud2)
 	return dY;
 }
 
-// Funkcje g_i
-double g1(double x1)
+double g(int i, double x1, double x2, double a)
 {
-	return -(x1 - 1.0);
+	switch (i)
+	{
+	case 1:
+		return -(x1 - 1.0);
+	case 2:
+		return -(x2 - 1.0);
+	case 3:
+		return sqrt(pow(x1, 2) + pow(x2, 2)) - a;
+	}
 }
 
-double g2(double x2)
+double testFun(matrix x)
 {
-	return -(x2 - 1.0);
-}
-
-double g3(double x1, double x2, double a)
-{
-	return sqrt(pow(x1, 2) + pow(x2, 2) - a);
+	double pom = M_PI * sqrt(pow(x(0) / M_PI, 2) + pow(x(1) / M_PI, 2));
+	return sin(pom) / pom;
 }
 
 matrix ff3Ta(matrix x, matrix ud1, matrix ud2)
 {
-	/*double x1 = x(0);
-	double x2 = x(1);
+	double function = testFun(x);
+	double penalty = 0.0;
 
-	matrix y = sin(M_PI * sqrt(x1 * M_PI) / 2 + pow(x2 * M_PI, 2));
-	return y;*/
-	
-	double suma = 0.0;
-	double x1 = x(0);
-	double x2 = x(1);
-	double a = 4;
-	//double a = 4,4934,
-	//double a = 5;
-
-	// Ograniczenia g1 i g2
-	suma += pow(std::max(0.0, g1(x1)), 2);
-	suma += pow(std::max(0.0, g2(x2)), 2);
-
-	// Ograniczenie g3
-	suma += pow(std::max(0.0, g3(x1, x2, a)), 2);
-	matrix wynik;
-	wynik = -1/suma;
-
-	return wynik;
+	for (int i = 1; i <= 3; ++i) {
+		double gValue = g(i, x(0), x(1), ud1(0));
+		if (gValue > 0)
+			penalty += pow(gValue,2);
+	}
+	return function + ud2 * penalty;
 }
 
 matrix ff3Tb(matrix x, matrix ud1, matrix ud2)
 {
-	/*double x1 = x(0);
-	double x2 = x(1);
+	double function = testFun(x);
+	double penalty = 0.0;
 
-	matrix y = M_PI * sqrt(pow(x1 * M_PI, 2) + pow(x2 * M_PI, 2));
-	return y;*/
-
-	double suma = 0.0;
-	double x1 = x(0);
-	double x2 = x(1);
-	double a = 4;
-	//double a = 4,4934,
-	//double a = 5;
-
-	// Ograniczenia g1 i g2
-	suma += pow(std::max(0.0, g1(x1)), 2);
-	suma += pow(std::max(0.0, g2(x2)), 2);
-
-	// Ograniczenie g3
-	suma += pow(std::max(0.0, g3(x1, x2, a)), 2);
-	matrix wynik;
-	wynik = suma;
-
-	return wynik;
+	for (int i = 1; i <= 3; ++i) {
+		double gValue = g(i, x(0), x(1), ud1(0));
+		penalty += 1 / gValue;
+	}
+	return function + ud2 * -penalty;
 }
 
 matrix ff3R(matrix x, matrix ud1, matrix ud2)
@@ -205,6 +179,7 @@ matrix ff3R(matrix x, matrix ud1, matrix ud2)
 		y = y + ud2 * pow(abs(x(1)) - 20, 2);
 	if (abs(Y[1](i50, 0) - 5) - 1 > 0)
 		y = y + ud2 * pow(abs(Y[1](i50, 0) - 5) - 1, 2);
+	//wy³¹czyæ x,dx,y,dy (0) (3)
 	Y[0].~matrix();
 	Y[1].~matrix();
 	return y;

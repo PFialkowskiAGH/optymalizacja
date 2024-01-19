@@ -21,8 +21,8 @@ int main()
 	try
 	{
 		//lab1();
-		lab2();
-		//lab3();
+		//lab2();
+		lab3();
 	}
 	catch (string EX_INFO)
 	{
@@ -122,6 +122,8 @@ void lab3()
 	do
 		x0 = 5 * rand_mat(2, 1) + 1;
 	while (norm(x0) > a);
+	//x0(0) = 4.5;
+	//x0(1) = 4.5;
 	cout << x0 << endl << endl;
 	opt = pen(ff3Ta, x0, c_ex, dc_ex, epsilon, Nmax, a);
 	cout << opt << endl;
@@ -130,6 +132,7 @@ void lab3()
 	opt = pen(ff3Tb, x0, c_in, dc_in, epsilon, Nmax, a);
 	cout << opt << endl;
 	cout << norm(opt.x) << endl << endl;
+	cout << testFun(opt.x) << endl;
 	solution::clear_calls();
 
 	//Rzut pilka

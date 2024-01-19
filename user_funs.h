@@ -20,3 +20,4 @@ matrix ff3R(matrix, matrix = NAN, matrix = NAN);
 matrix df3(double, matrix, matrix = NAN, matrix = NAN);
 
 extern matrix* pom;
+double testFun(matrix x);
